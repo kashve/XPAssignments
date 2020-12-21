@@ -1,0 +1,8 @@
+C:\UnitTesting\UTSprint\bin\Debug\netstandard2.0\UTSprint.deps.json
+C:\UnitTesting\UTSprint\bin\Debug\netstandard2.0\UTSprint.dll
+C:\UnitTesting\UTSprint\bin\Debug\netstandard2.0\UTSprint.pdb
+C:\UnitTesting\UTSprint\obj\Debug\netstandard2.0\UTSprint.csprojAssemblyReference.cache
+C:\UnitTesting\UTSprint\obj\Debug\netstandard2.0\UTSprint.AssemblyInfoInputs.cache
+C:\UnitTesting\UTSprint\obj\Debug\netstandard2.0\UTSprint.AssemblyInfo.cs
+C:\UnitTesting\UTSprint\obj\Debug\netstandard2.0\UTSprint.dll
+C:\UnitTesting\UTSprint\obj\Debug\netstandard2.0\UTSprint.pdb
