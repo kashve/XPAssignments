@@ -52,5 +52,39 @@ namespace UTSprint.Tests
             
 
         }
+
+        [Test]
+        public void ShouldReturnSuccessWhenCredentialsMatch()
+        {
+            //Arrange
+            var loginpage = new LoginPage();
+            var expectedusername = "Kashve";
+            var expectedpassword = "ABC456";
+
+            //Act
+            var validresult = loginpage.ValidateUser(expectedusername,expectedpassword);
+
+            //Assert
+            Assert.AreEqual("Login is successful",validresult);
+            
+
+        }
+
+        [Test]
+        public void ShouldReturnFailureWhenCredentialsMismatch()
+        {
+            //Arrange
+            var loginpage = new LoginPage();
+            var expectedusername = "Kashve";
+            var expectedpassword = "12ABC";
+
+            //Act
+            var validresult = loginpage.ValidateUser(expectedusername,expectedpassword);
+
+            //Assert
+            Assert.AreNotEqual("Login has failed",validresult);
+            
+
+        }
     }
 }
