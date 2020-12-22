@@ -49,5 +49,23 @@ namespace UTSprint
             }
 
         }
+       
+        public string ValidatePassword(string password)
+        {
+            int minimumlength =  6 ;
+            if(password.Length >=minimumlength)
+            {
+                if(Regex.Match(password, @"^.(?=.*\d)(?=.*[a-zA-Z])[A-Z].*$").Success)
+                {
+                    return("Password is correct");
+                }
+                else 
+                {
+                    return("Password should be of minimum 6 characters length with 1 Alphabet and 1 Integer");
+                }
+            }
+            return("Password should be of minimum 6 characters length with 1 Alphabet and 1 Integer");
+        }
+
     } 
 }
