@@ -6,148 +6,64 @@ namespace UTSprint.Tests
 {
     public class LoginPageTests
     {
-   
+        // User Login Validation - Test Case 1
         [Test]
-        public void ShouldReturnSucessMessage()
+        public void ShouldReturnFailureMessageWhenCredentialsMismatch()
         {
-             //Arrange
-            var loginpage = new LoginPage();
-            var expectedusername = "Kashve";
-            var expectedpassword = "ABC456";
 
-            //Act
-            var result = loginpage.UserRegistration(expectedusername,expectedpassword);
-
-            //Assert
-            Assert.AreEqual("Registration is successful",result);
-        }
-
-        [Test]
-        public void ShouldReturnFailureMessage()
-        {
-             //Arrange
-            var loginpage = new LoginPage();
-            var expectedusername = "!@#$%8";
-            var expectedpassword = "ABC456";
-
-            //Act
-            var result = loginpage.UserRegistration(expectedusername,expectedpassword);
-
-            //Assert
-            Assert.AreEqual("Registration has failed",result);
-        }
-
-        [Test]
-        public void ShouldReturnFailureWhenUserNameIsNull()
-        {
             //Arrange
-            var loginpage = new LoginPage();
-            var expectedpassword = "ABC456";
+
+            UserAccountCreation.UserCredentials.Add("Kashve", "ABC456");
+            var loginPage = new LoginPage();
 
             //Act
-            var result = loginpage.UserRegistration(null,expectedpassword);
+
+            var expectedresult = loginPage.UserLogin("Kashve", "DEF789");
 
             //Assert
-            Assert.AreEqual("Registration has failed",result);
-            
+
+            Assert.AreNotEqual("Login has failed as password mismatches", expectedresult);
 
         }
-
+        // User Login Validation - Test Case 2
         [Test]
-        public void ShouldReturnSuccessWhenCredentialsMatch()
+        public void ShouldReturnSuccessMessageWhenCredentialsMatch()
         {
+
             //Arrange
-            var loginpage = new LoginPage();
-            var expectedusername = "Kashve";
-            var expectedpassword = "ABC456";
+
+            UserAccountCreation.UserCredentials.Add("Kashve", "ABC456");
+            var loginPage = new LoginPage();
 
             //Act
-            var validresult = loginpage.ValidateUser(expectedusername,expectedpassword);
+
+            var expectedresult = loginPage.UserLogin("Kashve", "ABC456");
 
             //Assert
-            Assert.AreEqual("Login is successful",validresult);
-            
+
+            Assert.AreEqual("Login is successful", expectedresult);
 
         }
-
+        // User Login Validation - Test Case 3
         [Test]
-        public void ShouldReturnFailureWhenCredentialsMismatch()
+        public void ShouldReturnFailureMessageWhenPasswordNotOfMinimumLength()
         {
+
             //Arrange
-            var loginpage = new LoginPage();
-            var expectedusername = "Kashve";
-            var expectedpassword = "12ABC";
+
+            UserAccountCreation.UserCredentials.Add("Kashve", "ABC456");
+            var loginPage = new LoginPage();
 
             //Act
-            var validresult = loginpage.ValidateUser(expectedusername,expectedpassword);
+
+            var expectedresult = loginPage.UserLogin("Kashve", "ABC45");
 
             //Assert
-            Assert.AreNotEqual("Login has failed",validresult);
-            
+
+            Assert.AreEqual("Password should be of minimum 6 characters length with 1 Alphabet and 1 Integer", expectedresult);
 
         }
 
-        [Test]
-        public void ShouldReturnInvalidMessageWhenPasswordisnotofminimumlength()
-        {
-            //Arrange
-            var loginpage = new LoginPage();
-            var expectedpassword = "12ABC";
-
-            //Act
-            var validresult = loginpage.ValidatePassword(expectedpassword);
-
-            //Assert
-            Assert.AreEqual("Password should be of minimum 6 characters length with 1 Alphabet and 1 Integer",validresult);
-            
-
-        }
-        [Test]
-        public void ShouldReturnInvalidMessageWhenPassworddoesnotcontainalphabets()
-        {
-            //Arrange
-            var loginpage = new LoginPage();
-            var expectedpassword = "123456";
-
-            //Act
-            var validresult = loginpage.ValidatePassword(expectedpassword);
-
-            //Assert
-            Assert.AreEqual("Password should be of minimum 6 characters length with 1 Alphabet and 1 Integer",validresult);
-            
-
-        }
-
-        [Test]
-         public void ShouldReturnInvalidMessageWhenPassworddoesnotcontaininteger()
-        {
-            //Arrange
-            var loginpage = new LoginPage();
-            var expectedpassword = "ABCDEF#";
-
-            //Act
-            var validresult = loginpage.ValidatePassword(expectedpassword);
-
-            //Assert
-            Assert.AreEqual("Password should be of minimum 6 characters length with 1 Alphabet and 1 Integer",validresult);
-            
-
-        }
-        
-        [Test]
-         public void ShouldReturnSuccessMessageWithValidPassword()
-        {
-            //Arrange
-            var loginpage = new LoginPage();
-            var expectedpassword = "ABCD123";
-
-            //Act
-            var validresult = loginpage.ValidatePassword(expectedpassword);
-
-            //Assert
-            Assert.AreEqual("Password is correct",validresult);
-            
-
-        }
+       
     }
 }

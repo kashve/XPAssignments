@@ -30,3 +30,5 @@
 *.exe
 *.out
 *.app
+UnitTesting/UTSprint.Tests/bin/Debug/netcoreapp3.1/nunit_random_seed.tmp
+UnitTesting/UTSprint.Tests/bin/Debug/netcoreapp3.1/nunit_random_seed.tmp
