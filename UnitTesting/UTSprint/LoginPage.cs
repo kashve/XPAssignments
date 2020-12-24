@@ -6,12 +6,16 @@ namespace UTSprint
 {
     public class LoginPage
     {
+    public LoginPage(UserAccountCreation objusercreation)
+    {
+       this.useraccountcreation = objusercreation;
+    }
+       UserAccountCreation useraccountcreation;
        public string UserLogin(string username, string password)
         {
-
-            if (UserAccountCreation.UserCredentials.ContainsKey(username))
+            if (useraccountcreation.UserCredentials.ContainsKey(username))
             {
-                if ((String)UserAccountCreation.UserCredentials[username] == password)
+                if ((String)useraccountcreation.UserCredentials[username] == password)
                 {
                     return ("Login is successful");
                 }

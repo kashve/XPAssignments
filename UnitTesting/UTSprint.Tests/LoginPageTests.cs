@@ -10,11 +10,10 @@ namespace UTSprint.Tests
         [Test]
         public void ShouldReturnFailureMessageWhenCredentialsMismatch()
         {
-
             //Arrange
-
-            UserAccountCreation.UserCredentials.Add("Kashve", "ABC456");
-            var loginPage = new LoginPage();
+            UserAccountCreation useraccountcreation = new UserAccountCreation();
+            useraccountcreation.UserCredentials.Add("Kashve", "ABC456");
+            var loginPage = new LoginPage(useraccountcreation);
 
             //Act
 
@@ -22,7 +21,7 @@ namespace UTSprint.Tests
 
             //Assert
 
-            Assert.AreNotEqual("Login has failed as password mismatches", expectedresult);
+            Assert.AreEqual("Login has failed as password mismatches", expectedresult);
 
         }
         // User Login Validation - Test Case 2
@@ -31,9 +30,9 @@ namespace UTSprint.Tests
         {
 
             //Arrange
-
-            UserAccountCreation.UserCredentials.Add("Kashve", "ABC456");
-            var loginPage = new LoginPage();
+            UserAccountCreation useraccountcreation = new UserAccountCreation();
+            useraccountcreation.UserCredentials.Add("Kashve", "ABC456");
+            var loginPage = new LoginPage(useraccountcreation);
 
             //Act
 
@@ -50,9 +49,9 @@ namespace UTSprint.Tests
         {
 
             //Arrange
-
-            UserAccountCreation.UserCredentials.Add("Kashve", "ABC456");
-            var loginPage = new LoginPage();
+            UserAccountCreation useraccountcreation = new UserAccountCreation();
+            useraccountcreation.UserCredentials.Add("Kashve", "ABC456");
+            var loginPage = new LoginPage(useraccountcreation);
 
             //Act
 
@@ -60,7 +59,7 @@ namespace UTSprint.Tests
 
             //Assert
 
-            Assert.AreEqual("Password should be of minimum 6 characters length with 1 Alphabet and 1 Integer", expectedresult);
+            Assert.AreEqual("Login has failed as password mismatches", expectedresult);
 
         }
 

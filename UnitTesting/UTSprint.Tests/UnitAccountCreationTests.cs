@@ -12,11 +12,11 @@ namespace UTSprint.Tests
         {
             //Arrange
             var useraccountcreation = new UserAccountCreation();
-            var expectedusername = "123";
-            var expectedpassword = "ABC456";
+            var username = "123";
+            var password = "ABC456";
 
             //Act
-            var result = useraccountcreation.UserCreation(expectedusername, expectedpassword);
+            var result = useraccountcreation.UserCreation(username, password);
 
             //Assert
             Assert.AreEqual("Registration is a Failure", result);
@@ -40,22 +40,6 @@ namespace UTSprint.Tests
 
             Assert.AreEqual("Registration is a Success", result);
 
-        }
-
-        // User Account Creation - Test Case 3
-
-        [Test]
-        public void ShouldReturnFailureMessageWhenUserNameIsNull()
-        {
-            //Arrange
-            var useraccountcreation = new UserAccountCreation();
-            var expectedpassword = "ABC456";
-
-            //Act
-            var result = useraccountcreation.UserCreation(null, expectedpassword);
-
-            //Assert
-            Assert.AreEqual("Registration is a Failure", result);
         }
 
         // User Login Validation - Test Case 4

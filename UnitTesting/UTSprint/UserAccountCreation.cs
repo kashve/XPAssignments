@@ -7,7 +7,11 @@ namespace UTSprint
 {
     public class UserAccountCreation
     {
-        public static Hashtable UserCredentials = new Hashtable();
+        public Hashtable UserCredentials = null;
+        public UserAccountCreation()
+        { 
+            UserCredentials = new Hashtable();
+        }
 
         public string UserCreation(string username, string password)
         {
@@ -26,9 +30,11 @@ namespace UTSprint
         }
         public bool Validateusername(string username)
         {
+            
             if (!Regex.Match(username, "^[A-Z][a-zA-Z]*$").Success)
             {
-                throw new ArgumentNullException(username, "Username should be characters only");
+               // throw new ArgumentNullException(username, "Username should be characters only");
+               return false;
             }
             return true;
 
@@ -43,8 +49,7 @@ namespace UTSprint
                     return true;
                 }
             }
-            throw new ArgumentNullException(password, "Password should be of minimum 6 characters length with 1 Alphabet and 1 Integer");
-
+              return false;
         }
 
 
