@@ -1,0 +1,8 @@
+C:\TDDAuthentication\TDDAuthenticationSprint\bin\Debug\netstandard2.0\TDDAuthenticationSprint.deps.json
+C:\TDDAuthentication\TDDAuthenticationSprint\bin\Debug\netstandard2.0\TDDAuthenticationSprint.dll
+C:\TDDAuthentication\TDDAuthenticationSprint\bin\Debug\netstandard2.0\TDDAuthenticationSprint.pdb
+C:\TDDAuthentication\TDDAuthenticationSprint\obj\Debug\netstandard2.0\TDDAuthenticationSprint.csprojAssemblyReference.cache
+C:\TDDAuthentication\TDDAuthenticationSprint\obj\Debug\netstandard2.0\TDDAuthenticationSprint.AssemblyInfoInputs.cache
+C:\TDDAuthentication\TDDAuthenticationSprint\obj\Debug\netstandard2.0\TDDAuthenticationSprint.AssemblyInfo.cs
+C:\TDDAuthentication\TDDAuthenticationSprint\obj\Debug\netstandard2.0\TDDAuthenticationSprint.dll
+C:\TDDAuthentication\TDDAuthenticationSprint\obj\Debug\netstandard2.0\TDDAuthenticationSprint.pdb
