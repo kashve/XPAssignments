@@ -1,0 +1,8 @@
+c:\TDDRockPaperScissor\TDDRockPaperScissorSprint\bin\Debug\netstandard2.0\TDDRockPaperScissorSprint.deps.json
+c:\TDDRockPaperScissor\TDDRockPaperScissorSprint\bin\Debug\netstandard2.0\TDDRockPaperScissorSprint.dll
+c:\TDDRockPaperScissor\TDDRockPaperScissorSprint\bin\Debug\netstandard2.0\TDDRockPaperScissorSprint.pdb
+c:\TDDRockPaperScissor\TDDRockPaperScissorSprint\obj\Debug\netstandard2.0\TDDRockPaperScissorSprint.csprojAssemblyReference.cache
+c:\TDDRockPaperScissor\TDDRockPaperScissorSprint\obj\Debug\netstandard2.0\TDDRockPaperScissorSprint.AssemblyInfoInputs.cache
+c:\TDDRockPaperScissor\TDDRockPaperScissorSprint\obj\Debug\netstandard2.0\TDDRockPaperScissorSprint.AssemblyInfo.cs
+c:\TDDRockPaperScissor\TDDRockPaperScissorSprint\obj\Debug\netstandard2.0\TDDRockPaperScissorSprint.dll
+c:\TDDRockPaperScissor\TDDRockPaperScissorSprint\obj\Debug\netstandard2.0\TDDRockPaperScissorSprint.pdb
