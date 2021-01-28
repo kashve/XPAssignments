@@ -1,0 +1,8 @@
+c:\TDDBowlingGame\TDDBowlingGameSprint\bin\Debug\netstandard2.0\TDDBowlingGameSprint.deps.json
+c:\TDDBowlingGame\TDDBowlingGameSprint\bin\Debug\netstandard2.0\TDDBowlingGameSprint.dll
+c:\TDDBowlingGame\TDDBowlingGameSprint\bin\Debug\netstandard2.0\TDDBowlingGameSprint.pdb
+c:\TDDBowlingGame\TDDBowlingGameSprint\obj\Debug\netstandard2.0\TDDBowlingGameSprint.csprojAssemblyReference.cache
+c:\TDDBowlingGame\TDDBowlingGameSprint\obj\Debug\netstandard2.0\TDDBowlingGameSprint.AssemblyInfoInputs.cache
+c:\TDDBowlingGame\TDDBowlingGameSprint\obj\Debug\netstandard2.0\TDDBowlingGameSprint.AssemblyInfo.cs
+c:\TDDBowlingGame\TDDBowlingGameSprint\obj\Debug\netstandard2.0\TDDBowlingGameSprint.dll
+c:\TDDBowlingGame\TDDBowlingGameSprint\obj\Debug\netstandard2.0\TDDBowlingGameSprint.pdb
