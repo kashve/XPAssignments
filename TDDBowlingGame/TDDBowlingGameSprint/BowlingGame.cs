@@ -6,58 +6,94 @@ namespace TDDBowlingGameSprint
 
     public class BowlingGame
     {
-        private readonly int[] rolls = new int[24];
-        public List<int> frameScore = new List<int>();
-        private int CurrentRoll = 0; 
-        private int score = 0;
-        int rollNo = 0; 
-        public int CummulativeScore { get; set; }
+        public int FrameNo = 0;
+        public List<int> FrameScore = new List<int>();
+        private readonly int[] Rolls = new int[24];
+        private int CurrentRollNo = 0; private int Score = 0;
 
         public void Roll(int PinsDown)
         {
-            rolls[CurrentRoll] = PinsDown;
+            if (CurrentRollNo >= 24)
+            {
+                throw new IndexOutOfRangeException("Game Over!!");
+            }
+            else
+            {
+                Rolls[CurrentRollNo] = PinsDown;
 
-            if (PinsDown == 10)
-            { rolls[CurrentRoll + 1] = 0; CurrentRoll++; }
+                if (PinsDown == 10)
+                { Rolls[CurrentRollNo + 1] = 0; CurrentRollNo++; }
 
-            CummulativeScore = CalculateScore();
-            CurrentRoll++;
+                CalculateScore();
+
+                CurrentRollNo++;
+            }
         }
 
         public int CalculateScore()
         {
-            rollNo = 0; score = 0; frameScore = new List<int>();
-            for (int x = 0; x < 10; x++)
+            int Index = 0; FrameScore = new List<int>(); Score = 0;
+            for (int Frame = 0; Frame < 10; Frame++)
             {
-                bool doubleStrike = false; int framePinsCount;
-                if (rolls[rollNo] == 10) // Strike
+                bool DoubleStrike = false; int PinsInFrame;
+                if (IsStrike(Index)) 
                 {
-                    if (rolls[rollNo] + rolls[rollNo + 2] == 20) doubleStrike = true;
+                    if (IsDoubleStrike(Index)) DoubleStrike = true;
 
-                    framePinsCount = rolls[rollNo + 1] + rolls[rollNo + 2] + rolls[rollNo + 3];
-
-                    if (doubleStrike)
-                    { score += 10 + rolls[rollNo + 2] + rolls[rollNo + 3] + rolls[rollNo + 4]; }
-                    else
-                    { score += 10 + rolls[rollNo + 2] + rolls[rollNo + 3]; }
-
+                    PinsInFrame = Rolls[Index + 1] + Rolls[Index + 2] + Rolls[Index + 3];
+                    AddScore(DoubleStrike, "strike", Index);
                 }
-                else if (rolls[rollNo] + rolls[rollNo + 1] == 10) // Spare
+                else if (IsSpare(Index)) 
                 {
-                    framePinsCount = rolls[rollNo + 1] + rolls[rollNo + 2];
-                    score += 10 + rolls[rollNo + 2];
+                    PinsInFrame = Rolls[Index + 1] + Rolls[Index + 2];
+                    AddScore(DoubleStrike, "spare", Index);
                 }
-                else // Normal
+                else  
                 {
-                    framePinsCount = rolls[rollNo] + rolls[rollNo + 1];
-                    score += rolls[rollNo] + rolls[rollNo + 1];
+                    PinsInFrame = Rolls[Index] + Rolls[Index + 1];
+                    AddScore(DoubleStrike, "", Index);
                 }
-                if (framePinsCount > 0) frameScore.Add(score);
-                rollNo += 2;
+
+                if (PinsInFrame > 0 || Frame == 0) { FrameScore.Add(Score); }
+
+                Index += 2;
             }
-            CummulativeScore = score;
+            FrameNo = FrameScore.Count - 1;
 
-            return score;
+            return Score;
+        }
+
+        private bool IsStrike(int Index)
+        {
+            return (Rolls[Index] == 10);
+        }
+        private bool IsSpare(int Index)
+        {
+            return Rolls[Index] + Rolls[Index + 1] == 10;
+        }
+        private bool IsDoubleStrike(int Index)
+        {
+            return Rolls[Index] + Rolls[Index + 2] == 20;
+        }
+
+        private int AddScore(bool doubleStrike, string type, int index)
+        {
+            if (type == "strike")
+            {
+                if (doubleStrike)
+                { Score += 10 + Rolls[index + 2] + Rolls[index + 3] + Rolls[index + 4]; }
+                else
+                { Score += 10 + Rolls[index + 2] + Rolls[index + 3]; }
+            }
+            else if (type == "spare")
+            {
+                Score += 10 + Rolls[index + 2];
+            }
+            else
+            {
+                Score += Rolls[index] + Rolls[index + 1];
+            }
+            return Score;
         }
 
          
