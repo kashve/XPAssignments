@@ -1,120 +1,217 @@
 using NUnit.Framework;
 using TDDBowlingGameSprint;
 using System;
+using System.Collections.Generic;
 
 namespace TDDBowlingGame.Tests
 {
     public class BowlingGameTest
     {
-        BowlingGame game;
-        Frame_Score frame;
+        public List<int> frameScore = new List<int>();
+        private BowlingGame g;
 
         [SetUp]
         public void Setup()
         {
-            game = new BowlingGame();
-            frame = new Frame_Score();
+            g = new BowlingGame();
         }
 
-        //TestCase 1 AC 1
-
         [Test]
-        public void ShouldRetrunFrameCount_PassesWithMaxof10FramesAsCount_BowlingGame()
+        public void ShouldReturnScoreZero_WhenWeRollTheBall_And_NoPinsAreDown_InAllRoll()
         {
+            RollMany(20, 0);
 
-            Assert.AreEqual(10, frame.MaxFrame);
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(0, result);
         }
 
-        //TestCase 2 AC 2
-
         [Test]
-        public void ShouldReturnCountofMaxof2RollsInaFrame_WithPinsCountOf10_BowlingGame()
+        public void ShouldReturnScoreWithBonus_PerfectGame10PinsDownInAll10Frames()
         {
-          Assert.AreEqual(2, game.rollsScore(2));
+            RollMany(12, 10);
+
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(300, result);
         }
 
-        // TestCase 3 AC 3
         [Test]
-        public void ShouldReturnFrame1Score_SumOfMax2RollScores_BowlingGame()
+        public void ShouldReturnScore_WhenOneRollHasSomePinsAreDown()
         {
-            
+            g.Roll(1);
 
-            Assert.That(game.PlayGame(1,1,4), Is.EqualTo(5));
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(1, result);
         }
 
-         // TestCase 4 AC 3
         [Test]
-         public void ShouldReturnFrame2Score_SumOfPreviousFrameandCurrentFrameScores_BowlingGame()
+        public void ShouldReturnScore_WhenTwoRollsHaveSomePinsAreDown()
         {
-            int result = 0;
-            result = game.PlayGame(1,1,4);
-            result = game.PlayGame(2,3,5);
-            result = game.PlayGame(3,5,3);
-            Assert.AreEqual(21,result);
+            g.Roll(1);
+            g.Roll(2);
+            g.Roll(10);
+            g.Roll(6);
+            g.Roll(3);
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(31, result);
         }
 
-        // TestCase 5 AC 3
         [Test]
-        public void ShouldReturnTotalRollScoresOfAll10FramesTillTheLastFrame_BowlingGame() 
-         {
-             int result = 0;
-            result = game.PlayGame(1,1,4);
-            result = game.PlayGame(2,3,5);
-            result = game.PlayGame(3,5,3);
-            result = game.PlayGame(4,2,0);
-            result = game.PlayGame(5,2,6);
-            result = game.PlayGame(6,0,4);
-            result = game.PlayGame(7,0,0);
-            result = game.PlayGame(8,4,5);
-            result = game.PlayGame(9,5,5);
-            result = game.PlayGame(10,8,0);
-    
-            Assert.AreEqual(62,result);     
+        public void ShouldReturnScoreWithBonus_WithOneSpare()
+        {
+            g.Roll(5);
+            g.Roll(5);
+            g.Roll(3);
+
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(16, result);
+        }
+
+        [Test]
+        public void ShouldReturnScoreWithBonus_WithOneStrike()
+        {
+            g.Roll(10);
+            g.Roll(4);
+            g.Roll(5);
+
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(28, result);
+        }
+
+        [Test]
+        public void ShouldReturnScoreWithBonus_WithOneStrike_2ndTest()
+        {
+            g.Roll(0);
+            g.Roll(3);
+            g.Roll(10);
+            g.Roll(0);
+            g.Roll(4);
+
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(21, result);
+        }
+
+        [Test]
+        public void ShouldReturnScoreWithBonus_With2ConsecutiveStrikes()
+        {
+            RollMany(11, 4);
+            RollMany(1, 6);
+            g.Roll(10);
+            g.Roll(10);
+            g.Roll(5);
+            g.Roll(3);
+            g.Roll(4);
+            g.Roll(5);
+
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(120, result);
+        }
+
+        [Test]
+        public void ShouldReturnScoreWithBonus_With3ConsecutiveStrikes()
+        {
+            RollMany(11, 4);
+            RollMany(1, 7);
+            g.Roll(10);
+            g.Roll(10);
+            g.Roll(10);
+            g.Roll(3);
+            g.Roll(4);
+
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(128, result);
+        }
+
+
+        [Test]
+        public void ShouldReturnScoreWithBonus_With4ConsecutiveStrikes()
+        {
+            g.Roll(5);
+            g.Roll(5);
+
+            g.Roll(10);
+            g.Roll(10);
+            g.Roll(10);
+            g.Roll(10);
+
+            g.Roll(4);
+            g.Roll(3);
+
+            g.Roll(1);
+            g.Roll(2);
+
+            g.Roll(4);
+            g.Roll(6);
+
+            g.Roll(4);
+            g.Roll(4);
+
+            g.Roll(1);
+            g.Roll(2);
+
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(156, result);
+        }
+
+        [Test]
+        public void ShouldReturnScore_With10FrameHave2_Rolls()
+        {
+            g.Roll(1);
+            g.Roll(4);
+
+            g.Roll(4);
+            g.Roll(5);
+
+            g.Roll(6);
+            g.Roll(4);
+
+            g.Roll(5);
+            g.Roll(5);
+
+            g.Roll(10);
+
+            g.Roll(0);
+            g.Roll(1);
+
+            g.Roll(7);
+            g.Roll(3);
+
+            g.Roll(6);
+            g.Roll(4);
+
+            g.Roll(10);
+
+            g.Roll(2);
+            g.Roll(3);
+
+            frameScore = g.frameScore;
+            int result = g.CummulativeScore;
+            Assert.AreEqual(117, result);
+        }
+
+        private void RollMany(int rolls, int pins)
+        {
+            for (int i = 0; i < rolls; i++)
+            {
+                g.Roll(pins);
+            }
+        }
+
         
-         }
-         // TestCase 6 AC 4
-         [Test]
-         public void ShouldReturnTotalRollScoreOfTheLastFrame_BowlingGame() 
-         {
-             int result = 0;
-            result = game.PlayGame(1,1,4);
-            result = game.PlayGame(2,3,5);
-            result = game.PlayGame(3,5,3);
-            result = game.PlayGame(4,2,0);
-            result = game.PlayGame(5,2,6);
-            result = game.PlayGame(6,0,4);
-            result = game.PlayGame(7,0,0);
-            result = game.PlayGame(8,4,5);
-            result = game.PlayGame(9,5,5);
-            result = game.PlayGame(10,8,0);
-    
-            Assert.AreEqual(62,result);     
-        
-         }
-         // TestCase 7 AC 5
-        [Test]
-         public void ShouldEndTheBowlingGame_WhenFrameCountIsMoreThan10_BowlingGame() 
-         {
-             int result = 0;
-            result = game.PlayGame(1,1,4);
-            result = game.PlayGame(2,3,5);
-            result = game.PlayGame(3,5,3);
-            result = game.PlayGame(4,2,0);
-            result = game.PlayGame(5,2,6);
-            result = game.PlayGame(6,0,4);
-            result = game.PlayGame(7,0,0);
-            result = game.PlayGame(8,4,5);
-            result = game.PlayGame(9,5,5);
-            result = game.PlayGame(10,8,0);
-            result = game.PlayGame(11,10,10);
-            Assert.AreEqual(62,result);     
-        
-         }
       [OneTimeTearDown]
         public void TearDown()
         {
-            game = null;
-            frame = null;
+            g = null;
+            
 
         }
        

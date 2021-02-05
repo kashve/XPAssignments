@@ -3,52 +3,63 @@ using System.Collections.Generic;
 
 namespace TDDBowlingGameSprint
 {
-    public class Frame_Score
-    {
-        private Dictionary<int, int> dic = new Dictionary<int, int>();
-        public int MaxFrame {get; set; } = 10;
-        public int Frame {get; set;}
-        public int Score {get; set;}
-
-        public int MaxRolls {get; set; } = 2;
-    
-        public int AddFrame_Scores(int _FrameNumber, int _RollScore)
-        {
-        if(_FrameNumber <= MaxFrame)
-        {
-          Frame = _FrameNumber;
-          Score += _RollScore;
-        }
-         return Score;
-        }
-               
-    }
 
     public class BowlingGame
     {
-        int FinalScore = 0;
-        int rollCount = 0;
-        int[] rolls = new int[20];
-        Frame_Score FS = new Frame_Score();
+        private readonly int[] rolls = new int[24];
+        public List<int> frameScore = new List<int>();
+        private int CurrentRoll = 0; 
+        private int score = 0;
+        int rollNo = 0; 
+        public int CummulativeScore { get; set; }
 
-        public int PlayGame(int _FrameNumber, int _RollScore1, int _RollScore2)
+        public void Roll(int PinsDown)
         {
-            if (_FrameNumber == 1)
-            {
-                FinalScore = 0;
-            }
-           FinalScore = FS.AddFrame_Scores(_FrameNumber,(_RollScore1+_RollScore2));
-           if (_FrameNumber > FS.Frame)
-            {
-               return FS.Score;
-            }
-            return FinalScore;
+            rolls[CurrentRoll] = PinsDown;
 
+            if (PinsDown == 10)
+            { rolls[CurrentRoll + 1] = 0; CurrentRoll++; }
+
+            CummulativeScore = CalculateScore();
+            CurrentRoll++;
         }
-        public int rollsScore(int knockedPins) 
+
+        public int CalculateScore()
         {
-          return rolls[rollCount++] = knockedPins;
-         }
+            rollNo = 0; score = 0; frameScore = new List<int>();
+            for (int x = 0; x < 10; x++)
+            {
+                bool doubleStrike = false; int framePinsCount;
+                if (rolls[rollNo] == 10) // Strike
+                {
+                    if (rolls[rollNo] + rolls[rollNo + 2] == 20) doubleStrike = true;
+
+                    framePinsCount = rolls[rollNo + 1] + rolls[rollNo + 2] + rolls[rollNo + 3];
+
+                    if (doubleStrike)
+                    { score += 10 + rolls[rollNo + 2] + rolls[rollNo + 3] + rolls[rollNo + 4]; }
+                    else
+                    { score += 10 + rolls[rollNo + 2] + rolls[rollNo + 3]; }
+
+                }
+                else if (rolls[rollNo] + rolls[rollNo + 1] == 10) // Spare
+                {
+                    framePinsCount = rolls[rollNo + 1] + rolls[rollNo + 2];
+                    score += 10 + rolls[rollNo + 2];
+                }
+                else // Normal
+                {
+                    framePinsCount = rolls[rollNo] + rolls[rollNo + 1];
+                    score += rolls[rollNo] + rolls[rollNo + 1];
+                }
+                if (framePinsCount > 0) frameScore.Add(score);
+                rollNo += 2;
+            }
+            CummulativeScore = score;
+
+            return score;
+        }
+
          
     }
 }
